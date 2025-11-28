@@ -34,7 +34,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column( nullable = false)
-    private String role = Role.USER.name();
+    private Role role = Role.USER;
 
 
     private boolean active=true;
