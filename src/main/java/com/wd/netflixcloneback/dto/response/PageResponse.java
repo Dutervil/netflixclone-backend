@@ -12,9 +12,9 @@ import java.util.List;
 public class PageResponse <T> {
 
     private List<T> content;
-    private int totalElements;
-    private int totalPages;
-    private int number;
-    private int size;
+    private long totalElements;
+    private long totalPages;
+    private long number;
+    private long size;
 
 }

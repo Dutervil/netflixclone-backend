@@ -30,6 +30,7 @@ public class SecurityConfig {
             "/api/auth/validate-email",
             "/api/auth/verify-email",
             "/api/auth/send-verification",
+            "/api/auth/resend-verification",
             "/api/auth/forgot-password",
             "/api/auth/reset-password",};
 
@@ -38,14 +39,20 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(cors ->{})
-                .authorizeHttpRequests(auth-> auth.requestMatchers(PUBLIC_ENDPOINTS).permitAll().anyRequest().authenticated())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(cors -> {})
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
-
 
 }
