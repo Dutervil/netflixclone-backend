@@ -4,7 +4,6 @@ import com.wd.netflixcloneback.dto.request.UserRequest;
 import com.wd.netflixcloneback.dto.response.MessageResponse;
 import com.wd.netflixcloneback.dto.response.PageResponse;
 import com.wd.netflixcloneback.dto.response.UserResponse;
-import com.wd.netflixcloneback.repository.UserRepository;
 import com.wd.netflixcloneback.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
