@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
@@ -26,4 +28,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
                                    OR LOWER(u.email) LIKE LOWER(CONCAT('%',:search,'%'))
          """)
     Page<User> searchUsers(@Param("search") String trim, Pageable pageable);
+    @Query("select vid.id from User u join u.videos vid where u.email = :email and vid.id in :videoIds")
+    Set<Long> findWatchListVideoIds(@Param("email") String email, @Param("videoIds") List<Long> videoIds);
 }
