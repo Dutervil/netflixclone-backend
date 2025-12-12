@@ -29,8 +29,12 @@ public class WatchListController {
     }
 
     @GetMapping()
-    public ResponseEntity<PageResponse<VideoResponse>> getWatchList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(required = false ) String search,Authentication auth) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<PageResponse<VideoResponse>> getWatchList(@RequestParam(defaultValue = "0") int page,
+                                                                    @RequestParam(defaultValue = "10") int size,
+                                                                    @RequestParam(required = false ) String search,
+                                                                    Authentication auth) {
+
+        return ResponseEntity.ok(watchListService.getWatchListPaginated(auth.getName(),page,size,search));
 
     }
 }
